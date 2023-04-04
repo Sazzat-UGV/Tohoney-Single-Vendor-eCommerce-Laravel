@@ -7,7 +7,7 @@
 @push('admin_style')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
-<link rel="stylesheet1" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     .dataTables_length{
         padding: 20px 0;
@@ -21,7 +21,7 @@
     <h1>Category List Table</h1>
     <div class="col-12">
         <div class="d-flex justify-content-end">
-            <a href="{{ 'category.create' }}" class="btn btn-primary">
+            <a href="{{ route('category.create') }}" class="btn btn-primary">
             <i class="fas fa-plus-circle"></i>
             Add New Category
         </a>
@@ -51,8 +51,8 @@
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">setting</button>
                             <ul class="dropdown-menu">
-                               <li><a class="dropdown-item" href="#"><i class="fa-regular fa-pen-to-square"></i>Edit</a></li>
-                               <li><a class="dropdown-item" href="#"><i class="fa-regular fa-trash"></i>Delete</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="fa-regular fa-pen-to-square"></i> Edit</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="fa-solid fa-trash"></i> Delete</a></li>
                               </ul>
                             </div></td>
                     </tr>

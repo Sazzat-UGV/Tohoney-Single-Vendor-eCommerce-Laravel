@@ -49,7 +49,8 @@
 
 <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/main.css" />
 <script src="{{ asset('assets/backend') }}/js/base/loader.js"></script>
-
+<!--Toastr-->
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 <!-- Page Specific Style Start -->
 @stack('admin_style')
 <!-- Page Specific Style End -->

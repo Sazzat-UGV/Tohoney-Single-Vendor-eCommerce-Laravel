@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Requests\CategoryStoreRequest;
 
 class CategoryController extends Controller
 {
@@ -22,15 +25,21 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        //
+        Category::create([
+            'title'=>$request->title,
+            'slug'=>Str::slug($request->title)
+        ]);
+        
+        Toastr::success('Data Store Successfully!');
+        return redirect()->route('category.index');
     }
 
     /**
