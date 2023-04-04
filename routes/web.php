@@ -30,8 +30,10 @@ Route::prefix('admin/')->group(function(){
 
     Route::middleware(['auth'])->group(function(){
         Route::get('dashboard',[dashboardController::class,'dashboard'])->name('admin.dashboard');
+
+        
+        /*Resource Controller*/
+        Route::resource('category', CategoryController::class);
     });
 
-    /*Resource Controller*/
-    Route::resource('category', CategoryController::class);
 });
