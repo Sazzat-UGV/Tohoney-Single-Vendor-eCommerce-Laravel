@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\dashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +32,10 @@ Route::prefix('admin/')->group(function(){
     Route::middleware(['auth'])->group(function(){
         Route::get('dashboard',[dashboardController::class,'dashboard'])->name('admin.dashboard');
 
-        
+
         /*Resource Controller*/
         Route::resource('category', CategoryController::class);
+        Route::resource('testimonial', TestimonialController::class);
     });
 
 });
