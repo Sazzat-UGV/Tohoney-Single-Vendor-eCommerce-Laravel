@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    return view('frontend.pages.home');
+Route::prefix('')->group(function(){
+    Route::get('/',[HomeController::class,'home'])->name('home');
 });
 
 
