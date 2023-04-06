@@ -7,6 +7,7 @@ Category Create
 
 @push('admin_style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endpush
 @section('admin_content')
 
@@ -25,7 +26,7 @@ Category Create
 <div class="col-12 mt-5">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('category.store') }}" method="POST">
+            <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="category_title" class="form-label">
@@ -35,6 +36,19 @@ Category Create
                     is-invalid
                     @enderror" placeholder="enter category title" id="">
                     @error('title')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="category_image" class="form-label">
+                        Category Image
+                    </label>
+                    <input type="file" name="category_image" class=" dropify form-control @error('client_image')
+                    is-invalid
+                    @enderror" id="">
+                    @error('category_image')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -61,7 +75,11 @@ Category Create
 @endsection
 
 @push('admin_script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+$('.dropify').dropify();
+</script>
 @endpush
 
 

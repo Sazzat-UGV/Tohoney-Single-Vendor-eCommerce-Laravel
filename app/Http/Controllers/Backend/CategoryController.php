@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use Image;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       $categories=Category::latest('id')->select(['id','title','slug','updated_at'])->paginate();
+       $categories=Category::latest('id')->select(['id','category_image','title','slug','updated_at'])->paginate();
        return view('backend.pages.category.index',compact('categories'));
     }
 
@@ -34,11 +35,12 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
-        Category::create([
+        $category=Category::create([
             'title'=>$request->title,
             'slug'=>Str::slug($request->title)
         ]);
 
+        $this->image_upload($request, $category->id);
         Toastr::success('Data Store Successfully!');
         return redirect()->route('category.index');
     }
@@ -71,7 +73,7 @@ class CategoryController extends Controller
             'slug'=>Str::slug($request->title),
             'is_active'=>$request->filled('is_active')
         ]);
-
+        $this->image_upload($request, $category->id);
         Toastr::success('Data Update Successfully!');
         return redirect()->route('category.index');
     }
@@ -81,9 +83,40 @@ class CategoryController extends Controller
      */
     public function destroy($slug)
     {
-        $category=Category::whereSlug($slug)->first()->delete();
+        $category=Category::whereSlug($slug)->first();
+        if($category->category_image != 'default-image.jpg'){
+            //delete old photo
+            $photo_location='public/uploads/category/';
+            $old_photo_location=$photo_location .$category->category_image;
+            unlink(base_path($old_photo_location));
+
+        }
+        $category->delete();
 
         Toastr::success('Data Deleted Successfully!');
         return redirect()->route('category.index');
+    }
+
+    public function image_upload($request, $item_id){
+        $category=Category::findorFail($item_id);
+
+        if($request->hasFile('category_image')){
+            if($category->category_image != 'default-image.jpg'){
+                //delete old photo
+                $photo_location='public/uploads/category/';
+                $old_photo_location=$photo_location .$category->category_image;
+                unlink(base_path($old_photo_location));
+
+            }
+                $photo_loation='public/uploads/category/';
+                $uploaded_photo=$request->file('category_image');
+                $new_photo_name=$category->id .'.'.$uploaded_photo->getClientOriginalExtension();
+                $new_photo_location= $photo_loation. $new_photo_name;
+                Image::make($uploaded_photo)->resize(300,260)->save(base_path($new_photo_location),40);
+                $check=$category->update([
+                    'category_image'=>$new_photo_name,
+                ]);
+
+        }
     }
 }
