@@ -61,6 +61,24 @@
         </ul>
       </li>
       <li>
+        <a href="#testimonial" data-href="#">
+          <i data-cs-icon="user" class="icon" data-cs-size="18"></i>
+          <span class="label">Testimonial</span>
+        </a>
+        <ul id="testimonial">
+          <li>
+            <a href="{{ route('testimonial.index') }}">
+              <span class="label">List</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('testimonial.create') }}">
+              <span class="label">Add New</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
         <a href="#customers" data-href="Customers.html">
           <i data-cs-icon="user" class="icon" data-cs-size="18"></i>
           <span class="label">Customers</span>
