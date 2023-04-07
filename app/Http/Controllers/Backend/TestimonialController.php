@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\testimonialRequest;
 use App\Http\Requests\TestimonialStoreRequest;
+use App\Http\Requests\TestimonialUpdateRequest;
 use Image;
 
 class TestimonialController extends Controller
@@ -18,7 +19,8 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        $testimonials=Testimonial::latest('id')->select(['id','client_name','client_designation','client_message','client_image','updated_at','client_name_slug'])->paginate(5);
+        $testimonials=Testimonial::latest('id')->select(['id','client_name','client_name_slug','client_designation','client_message','client_image','updated_at'])->paginate();
+
         return view('backend.pages.testimonial.index',compact('testimonials'));
     }
 
@@ -39,7 +41,8 @@ class TestimonialController extends Controller
             'client_name'=>$request->client_name,
             'client_name_slug'=>Str::slug($request->client_name),
             'client_designation'=>$request->client_designation,
-            'client_message'=>$request->client_message
+            'client_message'=>$request->client_message,
+            'is_active'=>$request->filled('is_active')
 
         ]);
 
@@ -59,18 +62,31 @@ class TestimonialController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($slug)
+    public function edit($id)
     {
-        $testimonial=Testimonial::whereSlug($slug)->first();
-        return $testimonial;
+        $testimonial=Testimonial::whereclient_name_slug($id)->first();
+        return view('backend.pages.testimonial.edit',compact('testimonial'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TestimonialUpdateRequest $request, string $id)
     {
-        //
+        $testimonial=Testimonial::whereclient_name_slug($id)->first();
+        $testimonial->update([
+            'client_name'=>$request->client_name,
+            'client_name_slug'=>Str::slug($request->client_name),
+            'client_designation'=>$request->client_designation,
+            'client_message'=>$request->client_message,
+            'is_active'=>$request->filled('is_active')
+        ]);
+
+        $this->image_upload($request, $testimonial->id);
+        Toastr::success('Testimonial Update Successfully!');
+        return redirect()->route('testimonial.index');
+
+
     }
 
     /**
@@ -78,7 +94,17 @@ class TestimonialController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $testimonial=Testimonial::whereclient_name_slug($id)->first();
+        if($testimonial->client_image != 'default-client.jpg'){
+            //delete old photo
+            $photo_location='public/uploads/testimonial/';
+            $old_photo_location=$photo_location .$testimonial->client_image;
+            unlink(base_path($old_photo_location));
+        }
+        $testimonial->delete();
+        Toastr::success('Testimonial Delete Successfully!');
+        return redirect()->route('testimonial.index');
+
     }
 
 

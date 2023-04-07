@@ -12,7 +12,7 @@ Testimonial Create
 @section('admin_content')
 
 <div class="row">
-    <h1>Testimonial Create Form</h1>
+    <h1>Testimonial Edit Form</h1>
     <div class="col-12">
         <div class="d-flex justify-content-start">
             <a href="{{ route('category.index') }}" class="btn btn-primary">
@@ -26,13 +26,14 @@ Testimonial Create
 <div class="col-12 mt-5">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('testimonial.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('testimonial.update',$testimonial->client_name_slug) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="client_name" class="form-label">
                         Client Name
                     </label>
-                    <input type="text" name="client_name" class="form-control @error('client_name')
+                    <input type="text" value="{{ $testimonial->client_name }}" name="client_name" class="form-control @error('client_name')
                     is-invalid
                     @enderror" placeholder="enter client name" id="">
                     @error('client_name')
@@ -45,7 +46,7 @@ Testimonial Create
                     <label for="client_designation" class="form-label">
                         Client Designation
                     </label>
-                    <input type="text" name="client_designation" class="form-control @error('client_designation')
+                    <input type="text" value="{{ $testimonial->client_designation }}" name="client_designation" class="form-control @error('client_designation')
                     is-invalid
                     @enderror" placeholder="enter client designation" id="">
                     @error('client_designation')
@@ -58,9 +59,9 @@ Testimonial Create
                     <label for="client_message" class="form-label">
                         Client Message
                     </label>
-                    <textarea name="client_message" id="" cols="30" rows="5" class="form-control @error('client_message')
+                    <textarea name="client_message"  id="" cols="30" rows="5" class="form-control @error('client_message')
                     is-invalid
-                    @enderror"></textarea>
+                    @enderror">{{ $testimonial->client_message }}</textarea>
                     @error('client_message')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -81,7 +82,9 @@ Testimonial Create
                     @enderror
                 </div>
                 <div class="mb-3 form-check form-switch">
-                    <input type="checkbox" class="form-check-input" name="is_active" role="switch" id="activeStatus">
+                    <input type="checkbox" class="form-check-input" name="is_active" role="switch" id="activeStatus" @if ($testimonial->is_active)
+                        checked
+                    @endif>
                     <label for="activeStatus" class="form-check-label">
                         Active or Inactive
                     </label>
@@ -92,7 +95,7 @@ Testimonial Create
                     @enderror
                 </div>
                 <div class="mt-5">
-                    <button type="submit" class="btn btn-success">Store</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                 </div>
             </form>
         </div>
