@@ -1,6 +1,6 @@
 @extends("backend.layout.master")
 @section('title')
-Testimonial Index
+    Product Index
 @endsection
 
 
@@ -18,12 +18,12 @@ Testimonial Index
 
 @section('admin_content')
 <div class="row">
-    <h1>Testimonial List Table</h1>
+    <h1>Product List Table</h1>
     <div class="col-12">
         <div class="d-flex justify-content-end">
-            <a href="{{ route('testimonial.create') }}" class="btn btn-primary">
+            <a href="{{ route('products.create') }}" class="btn btn-primary">
             <i class="fas fa-plus-circle"></i>
-            Add New Testimonial
+            Add New Product
         </a>
         </div>
     </div>
@@ -33,29 +33,43 @@ Testimonial Index
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Image</th>
                         <th>Last Modified</th>
-                        <th>Client Image</th>
-                        <th>Client Name</th>
-                        <th>Client Designation</th>
+                        <th>Category Name</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock/Alert</th>
+                        <th>Rating</th>
                         <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ( $testimonials as $testimonial)
+                    @foreach ( $products as $product)
 
                     <tr>
-                        <th scope="row">{{ $testimonials->firstItem()+$loop->index }}</th>
-                        <td>{{ $testimonial->updated_at->format('d M Y') }}</td>
-                        <td><img src="{{ asset('uploads/testimonial') }}/{{ $testimonial->client_image }}" class="img-fluid rounded-circle h-50 w-50" alt=""></td>
-                        <td>{{ $testimonial->client_name }}</td>
-                        <td>{{ $testimonial->client_designation }}</td>
+                        <th scope="row">{{ $products->firstItem()+$loop->index }}</th>
+                        <td><img src="{{ asset('uploads/product_photo') }}/{{ $product->product_image}}" alt="" class="img-fluid rounded w-20 h-20 "></td>
+                        <td>{{ $product->updated_at->format('d M Y') }}</td>
+                        <td>{{ $product->category->title }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->product_price }}</td>
+                        <td><span class=" badge @if ($product->product_stock >= $product->alert_quantity)
+                            bg-success
+                        @else
+                            bg-danger
+                        @endif
+                        ">{{ $product->product_stock }}</span>/
+                            <span class="badge bg-danger">
+                                {{ $product->alert_quantity }}</td>
+                            </span>
+                        <td>{{ $product->product_rating }}</td>
                         <td><div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">setting</button>
                             <ul class="dropdown-menu">
-                               <li><a class="dropdown-item" href="{{ route('testimonial.edit',$testimonial->client_name_slug) }}"><i class="fa-regular fa-pen-to-square"></i> Edit</a></li>
+                               <li><a class="dropdown-item" href="{{ route('products.edit',$product->slug) }}"><i class="fa-regular fa-pen-to-square"></i> Edit</a></li>
                                <li>
-                                <form action="{{ route('testimonial.destroy',$testimonial->client_name_slug) }}" method="POST">
+                                <form action="{{ route('products.destroy',$product->slug) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="dropdown-item show_confirm" type="submit"><i class="fa-solid fa-trash"></i> Delete</button>

@@ -46,7 +46,7 @@ Category Edit
                     <label for="category_image" class="form-label">
                         Category Image
                     </label>
-                    <input type="file" name="category_image" class=" dropify form-control @error('client_image')
+                    <input type="file" data-default-file="{{ asset('uploads/category') }}/{{ $category->category_image }}" name="category_image" class=" dropify form-control @error('client_image')
                     is-invalid
                     @enderror" id="">
                     @error('category_image')

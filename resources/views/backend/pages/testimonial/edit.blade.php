@@ -1,7 +1,7 @@
 @extends('backend.layout.master')
 
 @section('title')
-Testimonial Create
+Testimonial Edit
 @endsection
 
 
@@ -72,9 +72,9 @@ Testimonial Create
                     <label for="client_image" class="form-label">
                         Client Image
                     </label>
-                    <input type="file" name="client_image" class=" dropify form-control @error('client_image')
+                    <input type="file" data-default-file="{{ asset('uploads/testimonial') }}/{{ $testimonial->client_image }}" name="client_image" class=" dropify form-control @error('client_image')
                     is-invalid
-                    @enderror" placeholder="enter client designation" id="">
+                    @enderror" >
                     @error('client_image')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@ Testimonial Create
                     @enderror
                 </div>
                 <div class="mt-5">
-                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="submit" class="btn btn-warning">Update</button>
                 </div>
             </form>
         </div>

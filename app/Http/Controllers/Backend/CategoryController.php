@@ -41,7 +41,7 @@ class CategoryController extends Controller
         ]);
 
         $this->image_upload($request, $category->id);
-        Toastr::success('Data Store Successfully!');
+        Toastr::success('Category Store Successfully!');
         return redirect()->route('category.index');
     }
 
@@ -74,7 +74,7 @@ class CategoryController extends Controller
             'is_active'=>$request->filled('is_active')
         ]);
         $this->image_upload($request, $category->id);
-        Toastr::success('Data Update Successfully!');
+        Toastr::success('Category Update Successfully!');
         return redirect()->route('category.index');
     }
 
@@ -93,7 +93,7 @@ class CategoryController extends Controller
         }
         $category->delete();
 
-        Toastr::success('Data Deleted Successfully!');
+        Toastr::success('Category Deleted Successfully!');
         return redirect()->route('category.index');
     }
 

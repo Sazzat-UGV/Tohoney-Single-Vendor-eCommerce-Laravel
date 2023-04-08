@@ -48,7 +48,7 @@ class TestimonialController extends Controller
 
         $this->image_upload($request, $testimonial->id);
 
-        Toastr::success('Data Store Successfully!');
+        Toastr::success('Testimonial Store Successfully!');
         return redirect()->route('testimonial.index');
     }
 

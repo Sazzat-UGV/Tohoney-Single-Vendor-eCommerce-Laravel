@@ -15,7 +15,7 @@ Testimonial Create
     <h1>Testimonial Create Form</h1>
     <div class="col-12">
         <div class="d-flex justify-content-start">
-            <a href="{{ route('category.index') }}" class="btn btn-primary">
+            <a href="{{ route('testimonial.index') }}" class="btn btn-primary">
                 <i class="fa-solid fa-backward"></i>
                 Back to Testimonials
             </a>
@@ -73,7 +73,7 @@ Testimonial Create
                     </label>
                     <input type="file" name="client_image" class=" dropify form-control @error('client_image')
                     is-invalid
-                    @enderror" placeholder="enter client designation" id="">
+                    @enderror">
                     @error('client_image')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
