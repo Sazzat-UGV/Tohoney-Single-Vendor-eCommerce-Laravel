@@ -171,6 +171,20 @@ Product Create
                     @enderror
                 </div>
 
+                <div class="col-12 mb-3">
+                    <label for="multiple_product_image" class="form-label">
+                        Product Multiple Image
+                    </label>
+                    <input type="file" multiple name="product_multiple_image[]" class=" form-control @error('product_multiple_image')
+                    is-invalid
+                    @enderror">
+                    @error('product_multiple_image')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
                 <div class="mb-3 form-check form-switch">
                     <input type="checkbox" class="form-check-input" name="is_active" role="switch" id="activeStatus">
                     <label for="activeStatus" class="form-check-label">

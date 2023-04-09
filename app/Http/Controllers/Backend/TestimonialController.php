@@ -104,7 +104,6 @@ class TestimonialController extends Controller
         $testimonial->delete();
         Toastr::success('Testimonial Delete Successfully!');
         return redirect()->route('testimonial.index');
-
     }
 
 
