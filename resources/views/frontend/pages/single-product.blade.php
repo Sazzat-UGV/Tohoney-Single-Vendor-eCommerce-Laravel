@@ -40,7 +40,7 @@ Single Product Page
                 <div class="product-single-content">
                     <h3>{{ $product->name }}</h3>
                     <div class="rating-wrap fix">
-                        <span class="pull-left">{{ $product->product_price }}</span>
+                        <span class="pull-left">${{ $product->product_price }}</span>
                         <ul class="rating pull-right">
                             @for ($i = 0; $i < $product->product_rating; $i++)
                             <li><i class="fa fa-star"></i></li>
@@ -50,10 +50,16 @@ Single Product Page
                     </div>
                     <p>{{ $product->short_description  }}</p>
                     <ul class="input-style">
+                        <form action="{{ route('add-to.card') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_slug" value="{{ $product->slug }}">
                         <li class="quantity cart-plus-minus">
-                            <input type="text" value="1" />
+                            <input type="text" value="1"  name="order_quantity"/>
                         </li>
-                        <li><a href="cart.html">Add to Cart</a></li>
+                        <li>
+                                <button type="submit" class="btn btn-danger" >Add to Cart</button>
+                            </li>
+                        </form>
                     </ul>
                     <ul class="cetagory">
                         <li>Categories:</li>

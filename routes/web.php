@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\Frontend\cardController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Route::prefix('')->group(function(){
     Route::get('/',[HomeController::class,'home'])->name('home');
     Route::get('/shop',[HomeController::class,'shopPage'])->name('shop.page');
     Route::get('/single-product/{product_slug}',[HomeController::class,'productdetails'])->name('productdetail.page');
+    Route::get('/shopping-card',[cardController::class,'cardPage'])->name('card.page');
+    Route::post('/add-to-card',[cardController::class,'addTocard'])->name('add-to.card');
+
+
 });
 
 
