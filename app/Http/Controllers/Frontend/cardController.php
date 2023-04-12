@@ -40,7 +40,11 @@ class cardController extends Controller
 
         Toastr::success('Product Added into Cart');
         return back();
+    }
 
-
+    public function removeFromCard($Card_id){
+        Cart::remove($Card_id);
+        Toastr::success('Product Removed from Cart!!');
+        return back();
     }
 }

@@ -33,7 +33,11 @@ Card Page
                                     <input type="text" value="{{ $cartitem->qty }}">
                                     <div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></td>
                                     <td class="total">{{ $cartitem->price*$cartitem->qty }}</td>
-                                    <td class="remove"><i class="fa fa-times"></i></td>
+                                    <td class="remove">
+                                        <a href="{{ route('removeFrom.card',['card_id'=>$cartitem->rowId]) }}">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
                         </tbody>
@@ -42,9 +46,7 @@ Card Page
                         <div class="col-xl-4 col-lg-5 col-md-6 ">
                             <div class="cartcupon-wrap">
                                 <ul class="d-flex">
-                                    <li>
-                                        <button>Update Cart</button>
-                                    </li>
+
                                     <li><a href="{{ route('shop.page') }}">Continue Shopping</a></li>
                                 </ul>
                                 <h3>Cupon</h3>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\dashboardController;
@@ -26,6 +27,7 @@ Route::prefix('')->group(function(){
     Route::get('/single-product/{product_slug}',[HomeController::class,'productdetails'])->name('productdetail.page');
     Route::get('/shopping-card',[cardController::class,'cardPage'])->name('card.page');
     Route::post('/add-to-card',[cardController::class,'addTocard'])->name('add-to.card');
+    Route::get('/remove-from-cart/{card_id}',[cardController::class,'removeFromCard'])->name('removeFrom.card');
 
 
 });
@@ -45,6 +47,7 @@ Route::prefix('admin/')->group(function(){
         Route::resource('category', CategoryController::class);
         Route::resource('testimonial', TestimonialController::class);
         Route::resource('products',ProductController::class);
+        Route::resource('coupon',CouponController::class);
     });
 
 });

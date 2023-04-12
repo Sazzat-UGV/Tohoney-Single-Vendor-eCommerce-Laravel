@@ -111,40 +111,27 @@
                             <li>
                                 <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
                                 <ul class="cart-wrap dropdown_style">
+                                    @php
+                                        $carts=\Gloudemans\Shoppingcart\Facades\Cart::content();
+                                        $total_price=\Gloudemans\Shoppingcart\Facades\Cart::subtotal();
+                                    @endphp
+                                    @foreach ($carts as $item)
+
                                     <li class="cart-items">
                                         <div class="cart-img">
-                                            <img src="{{ asset('assets/frontend') }}/images/cart/1.jpg" alt="">
+                                            <img src="{{ asset('uploads/product_photo') }}/{{ $item->options->product_image }}" class="img-fluid rounded " style="width:60px;" alt="">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="{{ route('card.page') }}">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
+                                            <a href="{{ route('card.page') }}">{{ $item->name }}</a>
+                                            <span>{{ $item->qty }}</span>
+                                            <p>{{ $item->qty*$item->price }}</p>
+                                            <a href="{{ route('removeFrom.card',['card_id'=>$item->rowId]) }}">
+                                                <i class="fa fa-times"></i>
+                                            </a>
                                         </div>
                                     </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('assets/frontend') }}/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="{{ route('card.page') }}">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('assets/frontend') }}/images/cart/2.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="{{ route('card.page') }}">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                    @endforeach
+                                    <li>Subtotol: <span class="pull-right">{{ $total_price }}</span></li>
                                     <li>
                                         <button>Check Out</button>
                                     </li>
