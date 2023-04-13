@@ -1,7 +1,10 @@
 <?php
-
 namespace App\Http;
 
+// use App\Http\Middleware\IsCustomer;
+
+use App\Http\Middleware\IsCustomer;
+use App\Http\Middleware\IsSystemAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -21,6 +24,9 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
+
+
     ];
 
     /**
@@ -63,5 +69,9 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        /* Custom Middleware */
+        'IsSystemAdmin' =>  IsSystemAdmin::class,
+        'IsCustomer' => IsCustomer::class,
     ];
 }

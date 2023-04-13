@@ -5,7 +5,7 @@ Login Page
 
 
 @section('frontend_content')
-@include('frontend.layout.inc.breadcumb',['pagename'=>'Register'])
+@include('frontend.layout.inc.breadcumb',['pagename'=>'Login'])
 
 
 <div class="account-area ptb-100">
