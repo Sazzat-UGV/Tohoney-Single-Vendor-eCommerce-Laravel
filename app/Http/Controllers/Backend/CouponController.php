@@ -89,4 +89,5 @@ class CouponController extends Controller
         Toastr::success('Coupon Delete Successfully!');
         return redirect()->route('coupon.index');
     }
+    
 }
