@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
 use App\Http\Controllers\Frontend\cardController;
+use App\Http\Controllers\Frontend\CheckourController;
 use App\Http\Controllers\Frontend\Customercontroller;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,9 @@ Route::prefix('')->group(function () {
     Route::get('/login', [RegisterController::class, 'loginPage'])->name('login.page');
     Route::post('/login', [RegisterController::class, 'loginStore'])->name('login.store');
 
+    /*AJAX Call */
+    Route::get('/upzilla/ajax/{district_id}', [CheckourController::class, 'loadUpazillaAjax'])->name('loadupazila.ajax');
+
     Route::prefix('customer/')->middleware('auth', 'IsCustomer')->group(function () {
         Route::get('dashboard', [Customercontroller::class, 'dashboard'])->name('customer.dashboard');
         Route::get('logout', [RegisterController::class, 'logout'])->name('customer.logout');
@@ -45,6 +49,11 @@ Route::prefix('')->group(function () {
 
         Route::post('card/apply-coupon', [cardController::class, 'couponApply'])->name('customer.couponapply');
         Route::get('cart/remove-coupon/{coupon_name}', [cardController::class, 'removeCoupon'])->name('customer.couponremove');
+
+        /*Checkout Page */
+        Route::get('checkout',[CheckourController::class,'checkoutPage'])->name('customer.checkoutPage');
+        Route::post('placeorder',[CheckourController::class,'placeOrder'])->name('customer.placeOrder');
+
     });
 });
 

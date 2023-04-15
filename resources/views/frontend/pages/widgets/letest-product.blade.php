@@ -26,7 +26,7 @@
                         </div>
                         <div class="product-content">
                             <h3><a href="{{ route('productdetail.page',['product_slug'=>$product->slug]) }}">{{ $product->name }}</a></h3>
-                            <p class="pull-left">${{ $product->product_price }}
+                            <p class="pull-left">৳{{ $product->product_price }}
 
                             </p>
                             <ul class="pull-right d-flex">

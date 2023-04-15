@@ -72,14 +72,14 @@ Card Page
                                 </p>
                                 <ul>
                                     @if (Session::has('coupon'))
-                                        <li><span class="pull-left">Discount Amount: </span>${{ Session::get('coupon')['discount_amount'] }}</li>
-                                        <li><span class="pull-left"> Total: </span>$ {{ Session::get('coupon')['balance'] }} <del class="text-danger">$ {{ Session::get('coupon')['cart_total'] }}</del></li>
+                                        <li><span class="pull-left">Discount Amount: </span>৳{{ Session::get('coupon')['discount_amount'] }}</li>
+                                        <li><span class="pull-left"> Total: </span>৳ {{ Session::get('coupon')['balance'] }} <del class="text-danger">৳ {{ Session::get('coupon')['cart_total'] }}</del></li>
                                     @else
-                                        <li><span class="pull-left">Subtotal: </span>${{ $carts_total }}</li>
-                                        <li><span class="pull-left"> Total: </span> ${{ $carts_total }}</li>
+                                        <li><span class="pull-left">Subtotal: </span>৳{{ $carts_total }}</li>
+                                        <li><span class="pull-left"> Total: </span> ৳{{ $carts_total }}</li>
                                     @endif
                                 </ul>
-                                <a href="checkout.html">Proceed to Checkout</a>
+                                <a href="{{ route('customer.checkoutPage') }}">Proceed to Checkout</a>
                             </div>
                         </div>
                     </div>

@@ -40,7 +40,7 @@ Single Product Page
                 <div class="product-single-content">
                     <h3>{{ $product->name }}</h3>
                     <div class="rating-wrap fix">
-                        <span class="pull-left">${{ $product->product_price }}</span>
+                        <span class="pull-left">৳{{ $product->product_price }}</span>
                         <ul class="rating pull-right">
                             @for ($i = 0; $i < $product->product_rating; $i++)
                             <li><i class="fa fa-star"></i></li>
@@ -286,7 +286,7 @@ Single Product Page
                         <div class="row">
                             <div class="col-7">
                                 <h3><a href="{{ route('productdetail.page',['product_slug'=> $reproduct->slug]) }}">{{ $reproduct->name }}</a></h3>
-                                <p>${{ $reproduct->product_price }}</p>
+                                <p>৳{{ $reproduct->product_price }}</p>
                             </div>
                             <div class="col-5 text-right">
                                 <ul>

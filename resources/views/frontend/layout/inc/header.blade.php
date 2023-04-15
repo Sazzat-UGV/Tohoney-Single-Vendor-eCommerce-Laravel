@@ -16,7 +16,7 @@
                                 <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown_style">
                                     <li><a href="{{ route('card.page') }}">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="{{ route('customer.checkoutPage') }}">Checkout</a></li>
                                     <li><a href="wishlist.html">wishlist</a></li>
                                     <li><a href="{{ route('customer.logout') }}">Logout</a></li>
                                 </ul>
@@ -53,7 +53,7 @@
                                     <ul class="dropdown_style">
                                         <li><a href="{{ route('shop.page') }}">Shop Page</a></li>
                                         <li><a href="{{ route('card.page') }}">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="{{ route('customer.checkoutPage') }}">Checkout</a></li>
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                     </ul>
                                 </li>
@@ -62,7 +62,7 @@
                                     <ul class="dropdown_style">
                                         <li><a href="about.html">About Page</a></li>
                                         <li><a href="{{ route('card.page') }}">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="{{ route('customer.checkoutPage') }}">Checkout</a></li>
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                         <li><a href="faq.html">FAQ</a></li>
                                     </ul>
