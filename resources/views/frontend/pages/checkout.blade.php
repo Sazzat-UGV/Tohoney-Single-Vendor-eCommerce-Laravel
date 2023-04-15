@@ -89,7 +89,7 @@ Checkout Page
                     </ul>
                     <ul class="payment-method">
                         <li>
-                            <input id="delivery" type="checkbox">
+                            <input id="delivery" name="method" type="checkbox">
                             <label for="delivery">Cash on Delivery</label>
                         </li>
                     </ul>

@@ -6,6 +6,7 @@ use App\Models\Upazila;
 use App\Models\District;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\orderStoreRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckourController extends Controller
@@ -25,7 +26,7 @@ class CheckourController extends Controller
         return response()->json($upazilas, 200);
     }
 
-    public function placeOrder(Request $request){
+    public function placeOrder(orderStoreRequest $request){
         dd($request->all());
     }
 }
