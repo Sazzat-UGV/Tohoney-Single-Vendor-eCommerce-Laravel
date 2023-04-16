@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Order;
+use App\Models\Billing;
+use App\Models\Product;
 use App\Models\Upazila;
 use App\Models\District;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\orderStoreRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -27,6 +34,45 @@ class CheckourController extends Controller
     }
 
     public function placeOrder(orderStoreRequest $request){
-        dd($request->all());
+
+
+        $billing=Billing::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone_number'=>$request->phone,
+            'district_id'=>$request->district_id,
+            'upazila_id'=>$request->upazila_id,
+            'address'=>$request->address,
+            'order_notes'=>$request->order_note,
+        ]);
+
+        $order=Order::create([
+            'user_id'=>Auth::id(),
+            'billing_id'=>$billing->id,
+            'sub_total'=>Session::get('coupon')['cart_total']??round(Cart::subtotalFloat()),
+            'discount_amount'=>Session::get('coupon')['discount_amount']?? 0,
+            'coupon_name'=>Session::get('coupon')['name'] ?? '',
+            'total'=>Session::get('coupon')['balance'] ?? round(Cart::subtotalFloat()),
+        ]);
+
+        foreach(Cart::content() as $cartitem){
+            OrderDetails::create([
+                'order_id' =>$order->id,
+                'user_id'=>Auth::id(),
+                'product_id'=>$cartitem->id,
+                'product_qty'=>$cartitem->qty,
+                'product_price'=>$cartitem->price,
+            ]);
+
+            Product::findorFail($cartitem->id)->decrement('product_stock',$cartitem->qty);
+
+        }
+        Cart::destroy();
+        Session::forget('coupon');
+
+        Toastr::success('Your Order Placed successfully!!!', 'Success');
+        return redirect()->route('card.page');
+
+
     }
 }

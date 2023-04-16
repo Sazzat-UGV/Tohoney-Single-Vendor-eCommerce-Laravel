@@ -80,7 +80,7 @@ class cardController extends Controller
                 Session::put('coupon', [
                     'name' => $check->coupon_name,
                     'discount_amount' => round((Cart::subtotalFloat() * $check->discount_amount) / 100),
-                    'cart_total' => Cart::subtotal(),
+                    'cart_total' => Cart::subtotalFloat(),
                     'balance' => round(Cart::subtotalFloat() - (Cart::subtotalFloat() * $check->discount_amount) / 100)
                 ]);
                 Toastr::success('Coupon Percentage Applied!!', 'Successfully!!');
