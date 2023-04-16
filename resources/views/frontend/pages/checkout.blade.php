@@ -61,7 +61,7 @@ Checkout Page
                                 </select>
                             </div>
                             <div class="col-12">
-                                <p>Tour Address <span class="text-danger">*</span></p>
+                                <p>Your Address <span class="text-danger">*</span></p>
                                 <input type="text" name="address" placeholder="Enter Your Address">
                             </div>
                             <div class="col-12">

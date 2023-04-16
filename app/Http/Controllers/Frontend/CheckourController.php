@@ -9,9 +9,11 @@ use App\Models\Upazila;
 use App\Models\District;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use App\Mail\PurchaseConfirm;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\orderStoreRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -69,6 +71,11 @@ class CheckourController extends Controller
         }
         Cart::destroy();
         Session::forget('coupon');
+
+        $order=Order::whereId($order->id)->with(['billing','orderdetails'])->get();
+
+        Mail::to($request->email)->send(new PurchaseConfirm(($order)));
+
 
         Toastr::success('Your Order Placed successfully!!!', 'Success');
         return redirect()->route('card.page');
