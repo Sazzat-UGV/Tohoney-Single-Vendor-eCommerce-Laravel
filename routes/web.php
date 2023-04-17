@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\Customercontroller as BackendCustomercontroller;
+use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\dashboardController;
@@ -73,5 +75,8 @@ Route::prefix('admin/')->group(function () {
         Route::resource('testimonial', TestimonialController::class);
         Route::resource('products', ProductController::class);
         Route::resource('coupon', CouponController::class);
+        Route::get('order-list',[OrderController::class,'index'])->name('admin.orderlist');
+        Route::get('customer-list',[BackendCustomercontroller::class,'index'])->name('admin.customerlist');
+        Route::delete('customer-list-delete/{email}',[BackendCustomercontroller::class,'deleteCustomer'])->name('admin.customerDelete');
     });
 });

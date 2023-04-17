@@ -5,7 +5,7 @@ Customer Page
 
 
 @section('frontend_content')
-@include('frontend.layout.inc.breadcumb',['pagename'=>'Register'])
+@include('frontend.layout.inc.breadcumb',['pagename'=>'Customer Dashboard'])
 <div class="col-lg-12 col-md-12 m-auto">
     <div class="card">
         <div class="card-header">
