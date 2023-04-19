@@ -93,47 +93,11 @@
         </a>
         <ul id="storefront">
           <li>
-            <a href="Storefront.Home.html">
-              <span class="label">Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="Storefront.Filters.html">
-              <span class="label">Filters</span>
-            </a>
-          </li>
-          <li>
-            <a href="Storefront.Categories.html">
-              <span class="label">Categories</span>
-            </a>
-          </li>
-          <li>
-            <a href="Storefront.Detail.html">
-              <span class="label">Detail</span>
-            </a>
-          </li>
-          <li>
-            <a href="Storefront.Cart.html">
-              <span class="label">Cart</span>
-            </a>
-          </li>
-          <li>
-            <a href="Storefront.Checkout.html">
-              <span class="label">Checkout</span>
-            </a>
-          </li>
-          <li>
-            <a href="Storefront.Invoice.html">
-              <span class="label">Invoice</span>
+            <a href="{{ route('admin.contactList') }}">
+              <span class="label">Contact Info</span>
             </a>
           </li>
         </ul>
-      </li>
-      <li>
-        <a href="Shipping.html">
-          <i data-cs-icon="shipping" class="icon" data-cs-size="18"></i>
-          <span class="label">Shipping</span>
-        </a>
       </li>
       <li>
         <a href="{{ route('coupon.index') }}">
@@ -142,7 +106,7 @@
         </a>
       </li>
       <li>
-        <a href="Settings.html">
+        <a href="#">
           <i data-cs-icon="gear" class="icon" data-cs-size="18"></i>
           <span class="label">Settings</span>
         </a>

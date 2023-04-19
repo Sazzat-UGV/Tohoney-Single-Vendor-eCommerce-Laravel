@@ -2,16 +2,20 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\contactController as BackendContactController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\Customercontroller as BackendCustomercontroller;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\Frontend\aboutController;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
 use App\Http\Controllers\Frontend\cardController;
 use App\Http\Controllers\Frontend\CheckourController;
+use App\Http\Controllers\Frontend\contactController;
 use App\Http\Controllers\Frontend\Customercontroller;
+use App\Http\Controllers\Frontend\faqController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +47,13 @@ Route::prefix('')->group(function () {
     /*AJAX Call */
     Route::get('/upzilla/ajax/{district_id}', [CheckourController::class, 'loadUpazillaAjax'])->name('loadupazila.ajax');
 
+    /*other pages */
+    Route::get('about',[aboutController::class,'aboutPage'])->name('aboutPage');
+    Route::get('faq',[faqController::class,'faqPage'])->name('faqPage');
+    Route::get('contact',[contactController::class,'contactPage'])->name('contactPage');
+    Route::post('contact',[contactController::class,'contactData'])->name('contactFormData');
+
+
     Route::prefix('customer/')->middleware('auth', 'IsCustomer')->group(function () {
         Route::get('dashboard', [Customercontroller::class, 'dashboard'])->name('customer.dashboard');
         Route::get('logout', [RegisterController::class, 'logout'])->name('customer.logout');
@@ -55,7 +66,6 @@ Route::prefix('')->group(function () {
         /*Checkout Page */
         Route::get('checkout',[CheckourController::class,'checkoutPage'])->name('customer.checkoutPage');
         Route::post('placeorder',[CheckourController::class,'placeOrder'])->name('customer.placeOrder');
-
     });
 });
 
@@ -78,5 +88,6 @@ Route::prefix('admin/')->group(function () {
         Route::get('order-list',[OrderController::class,'index'])->name('admin.orderlist');
         Route::get('customer-list',[BackendCustomercontroller::class,'index'])->name('admin.customerlist');
         Route::delete('customer-list-delete/{email}',[BackendCustomercontroller::class,'deleteCustomer'])->name('admin.customerDelete');
+        Route::get('contact',[BackendContactController::class,'contactIndex'])->name('admin.contactList');
     });
 });
