@@ -24,6 +24,7 @@ contact info
                         <th>#</th>
                         <th>Date</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Subject</th>
                         <th>Message</th>
                     </tr>
@@ -34,6 +35,7 @@ contact info
                             <th scope="row">{{ $contacts->firstItem() + $loop->index }}</th>
                             <td>{{ $contact->created_at->format('d M Y') }}</td>
                             <td>{{ $contact->name }}</td>
+                            <td>{{ $contact->email }}</td>
                             <td>{{ $contact->subject }}</td>
                             <td>
                              <!-- Button trigger modal -->
