@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
 
 
-    
+
     public function home(){
         $testimonials=Testimonial::where('is_active', 1)->latest('id')->limit(3)->select(['id','client_name','client_designation','client_message','client_image'])->get();
 
@@ -20,7 +20,8 @@ class HomeController extends Controller
 
         $products=Product::where('is_active',1)->latest('id')->select(['id','name','slug','product_price','product_stock','product_rating','product_image'])->paginate(12);
 
-        return view('frontend.pages.home',compact('testimonials','categories','products'));
+        $latest_product=Product::where('is_active',1)->latest('product_rating')->select(['id','name','product_price','product_rating','product_image'])->paginate(4);
+        return view('frontend.pages.home',compact('testimonials','categories','products','latest_product'));
     }
 
 
