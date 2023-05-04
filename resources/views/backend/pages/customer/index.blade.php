@@ -41,7 +41,7 @@ Customer Index
                             <form action="{{ route('admin.customerDelete',['email'=>$customer->email]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger show_confirm">Delete</button>
                             </form>
 
                         </td>
@@ -57,12 +57,35 @@ Customer Index
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable({
-                pagingType: 'first_last_numbers',
-            });
-        });
+$(document).ready(function () {
+    $('#example').DataTable({
+        pagingType: 'first_last_numbers',
+   });
+    $('.show_confirm').click(function(event){
+        let form = $(this).closest('form');
+        event.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+            })
+    })
+});
     </script>
 @endpush
